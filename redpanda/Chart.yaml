@@ -19,6 +19,6 @@ description: Redpanda is the real-time engine for modern apps.
 type: application
 version: 1.0.7
 deprecated: true
-appVersion: 21.11.11
+appVersion: 22.1.7
 sources:
 - https://github.com/vectorizedio/helm-charts
