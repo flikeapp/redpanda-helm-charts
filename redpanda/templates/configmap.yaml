@@ -48,3 +48,5 @@ data:
 {{ toYaml .Values.config.pandaproxy | indent 6 }}
     schema_registry:
 {{ toYaml .Values.config.schema_registry | indent 6 }}
+    schema_registry_client:
+{{ toYaml .Values.config.schema_registry_client | indent 6 }}

@@ -36,6 +36,7 @@ spec:
   serviceName: {{ template "redpanda.fullname" . }}
   replicas: {{ .Values.statefulset.replicas | int64 }}
   updateStrategy: {{- toYaml .Values.statefulset.updateStrategy | nindent 4 }}
+  minReadySeconds: {{ .Values.statefulset.minReadySeconds }}
   podManagementPolicy: {{ .Values.statefulset.podManagementPolicy | quote }}
   template:
     metadata:

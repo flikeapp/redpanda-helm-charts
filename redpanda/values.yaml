@@ -26,7 +26,7 @@
 image:
   repository: vectorized/redpanda
   # The imagePullPolicy will default to Always when the tag is 'latest'
-  tag: v21.11.15
+  tag: v22.1.7
 
 # Additional labels to apply to all Kubernetes resources created by this chart.
 labels: {}
@@ -135,6 +135,7 @@ statefulset:
   replicas: 3
   updateStrategy:
     type: RollingUpdate
+  minReadySeconds: 60
   podManagementPolicy: Parallel
   budget:
     maxUnavailable: 1
