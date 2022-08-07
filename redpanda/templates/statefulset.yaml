@@ -36,7 +36,6 @@ spec:
   serviceName: {{ template "redpanda.fullname" . }}
   replicas: {{ .Values.statefulset.replicas | int64 }}
   updateStrategy: {{- toYaml .Values.statefulset.updateStrategy | nindent 4 }}
-  minReadySeconds: {{ .Values.statefulset.minReadySeconds }}
   podManagementPolicy: {{ .Values.statefulset.podManagementPolicy | quote }}
   template:
     metadata:
@@ -86,6 +85,13 @@ spec:
       containers:
         - name: {{ template "redpanda.name" . }}
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          readinessProbe:
+            tcpSocket:
+              port: {{ template "redpanda.rpc.listen.port" $ }}
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            successThreshold: 6 # wait at least 60 seconds before considering pod ready
+            failureThreshold: 10 # give pod enough time to start
           env:
             - name: SERVICE_NAME
               valueFrom:
